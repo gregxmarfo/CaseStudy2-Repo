@@ -40,6 +40,7 @@ The Procrastination csv data set contains 4264 observations and 61 variables
 ```{r}
 class(Procrastination)
 sapply(Procrastination, class)
+summary(Procrastination)
 
 ```
 
@@ -73,6 +74,15 @@ Install necessary packages if not installed:
 ```{r CaseStudy_2_4.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
 # a Read the csv into R and take a look at the data set. Output how many rows and columns the data.frame is.
+
+library(readr)
+Procrastination <- read_csv("C:/projMSDS6306/CaseStudy2/Data/Procrastination.csv")
+
+str(procrastination)
+
+# checking for Null values in the data set
+
+anyNA(Procrastination)
 
 
 # b The column names are either too much or not enough. Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you're updating your codebook with information on the tidied data set as well.
