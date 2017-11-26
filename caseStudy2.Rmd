@@ -27,6 +27,28 @@ output:
 
 ## Installing Necessary Libraries
 
+##Code Book
+
+CODE BOOK
+
+Data Set Code Book: Procrastination
+November 25, 2017
+
+The Procrastination csv data set contains 4264 observations and 61 variables
+
+
+```{r}
+class(Procrastination)
+sapply(Procrastination, class)
+
+```
+
+
+
+
+  
+  
+
 Install necessary packages if not installed:
 
 ```{r CaseStudy_2_2.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
