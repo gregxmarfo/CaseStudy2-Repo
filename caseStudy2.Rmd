@@ -82,6 +82,21 @@ Install necessary packages if not installed:
 
 # (https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries). Read what it is, because you'll have to explain it to your clients. BIG TIP: This one's going to be weird looking-it's real scraping. Make sure you're looking between the webpage and R while you do this to find your footing. Unit 9's HW might help.
 
+library('xml2')
+library('rvest')
+library('dplyr')
+library('tidyr')
+
+url <- 'https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries'
+
+#Read the webpage from the URL
+hp_webpage <- read_html(url)
+
+#Grab all the table nodes from the page
+hp_nodes <- html_nodes(hp_webpage, "table")
+
+#Convert the nodes to HTML tables
+hp_tables <- html_table(hp_nodes)
 
 # a You will notice there are several sections, but you should only worry about the Complete List of Countries section of this Wikipedia entry. There are 8 tables in this section, but you should pull these eight, clean them as to be usable, and then find a way to bind them into one singular table. You only need Country and 2016 Estimates for 2015 (you can call this HDI) columns for the final table.
 
