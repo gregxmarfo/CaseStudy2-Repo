@@ -43,9 +43,9 @@ The Procrastination csv data set contains 4264 observations and 61 variables
 
 
 ```{r}
-#class(Procrastination)
-#sapply(Procrastination, class)
-#summary(Procrastination)
+class(Procrastination)
+sapply(Procrastination, class)
+summary(Procrastination)
 
 ```
 
@@ -98,6 +98,10 @@ glimpse(Procrastination)
 summary(Procrastination)
 
 # b The column names are either too much or not enough. Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you're updating your codebook with information on the tidied data set as well.
+
+#renaming the columns
+
+names(Procrastination)[5:61] = c("WorkStatus","Income","Occupation","PositionYrs","PositionMnth","CommSize","Country","MaritalStatus","NumofSons","NumofDaughters","XDP1","XDP2","XDP3","XDP4","XDP5","XAIP1","XAIP2","XAIP3","XAIP4","XAIP5","XAIP6","XAIP7","XAIP8","XAIP9","XAIP10","XAIP11","XAIP12","XAIP13","XAIP14","XAIP15","XGP1","XGP2","XGP3","XGP4","XGP5","XGP6","XGP7","XGP8","XGP9","XGP10","XGP11","XGP12","XGP13","XGP14","XGP15","XGP16","XGP17","XGP18","XGP19","XGP20","XSWLS1","XSWLS2","XSWLS3","XSWLS4","XSWLS5","Yourself","Others")
 
 
 # c Some columns are, due to Qualtrics, malfunctioning. Prime examples are the following columns: "How long have you held this position?: Years", Country of residence, Number of sons, and Current Occupation.
