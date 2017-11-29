@@ -1,36 +1,17 @@
----
-title: "Case Study 2"
-author:
-- 'Section 403, Group 5:'
-- '    Gregory Asamoah'
-- '    Emil Ramos'
-- '    Brian Coari'
-date: "December 03, 2017"
-knit: (function(inputFile, encoding) { 
-      out_dir <- 'Paper';
-      rmarkdown::render(inputFile,
-                        encoding=encoding, 
-                        output_file=file.path(dirname(inputFile), out_dir, 'caseStudy2.html')) })
-output:
-  html_document:
-    keep_md: true
----
-
-```{r CaseStudy_2_1.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
+# Case Study 2
+Section 403, Group 5:  
+    Gregory Asamoah  
+    Emil Ramos  
+    Brian Coari  
+December 03, 2017  
 
 
-```
 
 ## Introduction
 
 [some text here]
 
 ## Installing Necessary Libraries
-
-```{r}
-
-```
-
 
 ##Code Book
 
@@ -42,37 +23,106 @@ November 25, 2017
 The Procrastination csv data set contains 4264 observations and 61 variables
 
 
-```{r}
+
+```r
 #class(Procrastination)
 #sapply(Procrastination, class)
 #summary(Procrastination)
-
 ```
 
 Install necessary packages if not installed:
 
-```{r CaseStudy_2_2.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
-
-```
 
 
 ## Clean your Raw Data
 
-```{r CaseStudy_2_4.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
+```r
 # a Read the csv into R and take a look at the data set. Output how many rows and columns the data.frame is.
 
 library(readr)
 Procrastination <- read.csv(".\\Data\\Procrastination.csv",header=TRUE, sep=",", fileEncoding="UTF-8-BOM")
 
 str(Procrastination)
+```
 
+```
+## 'data.frame':	4264 obs. of  61 variables:
+##  $ Age                                                                                                                     : num  67.5 45 19 37.5 28 23 67.5 37.5 24 45 ...
+##  $ Gender                                                                                                                  : Factor w/ 3 levels "","Female","Male": 3 3 2 3 2 2 2 3 2 3 ...
+##  $ Kids                                                                                                                    : Factor w/ 3 levels "","No Kids","Yes Kids": 3 3 2 3 2 2 2 2 2 3 ...
+##  $ Edu                                                                                                                     : Factor w/ 9 levels "","deg","dip",..: 8 2 3 8 2 2 8 4 8 8 ...
+##  $ Work.Status                                                                                                             : Factor w/ 7 levels "","0","full-time",..: 5 4 6 3 3 3 4 4 3 3 ...
+##  $ Annual.Income                                                                                                           : int  25000 35000 NA 45000 35000 15000 NA 10000 250000 87500 ...
+##  $ Current.Occupation                                                                                                      : Factor w/ 676 levels "","'Utterly shiftless arts student'... at p",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ How.long.have.you.held.this.position...Years                                                                            : num  9.0 1.5e-19 0.0 1.4e+01 1.0 ...
+##  $ How.long.have.you.held.this.position...Months                                                                           : int  0 0 0 0 0 0 0 0 0 0 ...
+##  $ Community.size                                                                                                          : Factor w/ 10 levels "","0","8","Large-City",..: 4 10 5 5 10 9 5 10 10 10 ...
+##  $ Country.of.residence                                                                                                    : Factor w/ 94 levels "","0","Afghanistan",..: 31 15 25 26 26 26 60 88 88 73 ...
+##  $ Marital.Status                                                                                                          : Factor w/ 7 levels "","0","Divorced",..: 3 4 6 4 6 6 3 6 6 4 ...
+##  $ Number.of.sons                                                                                                          : Factor w/ 9 levels "","0","10","3",..: 2 9 2 2 2 2 2 2 2 8 ...
+##  $ Number.of.daughters                                                                                                     : int  5 1 0 1 0 0 0 0 0 0 ...
+##  $ X.DP.1..I.waste.a.lot.of.time.on.trivial.matters.before.getting.to.the.final.decisions                                  : int  3 3 5 3 3 3 3 4 2 5 ...
+##  $ X.DP.2..Even.after.I.make.a.decision.I.delay.acting.upon.it                                                             : int  1 4 5 3 3 4 4 3 2 5 ...
+##  $ X.DP.3..I.don.t.make.decisions.unless.I.really.have.to                                                                  : int  1 3 2 3 2 3 3 4 4 5 ...
+##  $ X.DP.4..I.delay.making.decisions.until.it.s.too.late                                                                    : int  1 3 3 3 1 2 2 4 4 5 ...
+##  $ X.DP.5..I.put.off.making.decisions.until.it.s.too.late                                                                  : int  1 3 3 3 1 2 2 3 4 5 ...
+##  $ X.AIP.1..I.pay.my.bills.on.time                                                                                         : int  1 3 5 2 1 2 3 4 3 3 ...
+##  $ X.AIP.2.I.am.prompt.and.on.time.for.most.appointments.                                                                  : int  1 1 4 1 1 5 1 4 3 3 ...
+##  $ X.AIP.3.I.lay.out.my.clothes.the.night.before.I.have.an.important.appointment..so.I.won.t.be.late                       : int  1 4 4 4 3 5 1 4 3 5 ...
+##  $ X.AIP.4..I.find.myself.running.later.than.I.would.like.to.be                                                            : int  1 3 5 3 3 5 2 4 4 3 ...
+##  $ X.AIP.5..I.don.t.get.things.done.on.time                                                                                : int  1 3 5 5 2 5 3 4 4 5 ...
+##  $ X.AIP.6..If.someone.were.teaching.a.course.on.how.to.get.things.done.on.time..I.would.attend                            : int  1 4 5 3 2 3 3 2 2 1 ...
+##  $ X.AIP.7..My.friends.and.family.think.I.wait.until.the.last.minute.                                                      : int  1 3 5 4 2 5 1 5 2 5 ...
+##  $ X.AIP.8..I.get.important.things.done.with.time.to.spare                                                                 : int  1 3 4 5 2 4 4 2 4 5 ...
+##  $ X.AIP.9..I.am.not.very.good.at.meeting.deadlines                                                                        : int  5 3 5 4 1 4 5 4 2 5 ...
+##  $ X.AIP.10..I.find.myself.running.out.of.time.                                                                            : int  1 3 5 5 1 5 5 3 2 5 ...
+##  $ X.AIP.11..I.schedule.doctor.s.appointments.when.I.am.supposed.to.without.delay                                          : int  1 4 4 4 2 3 3 2 4 4 ...
+##  $ X.AIP.12..I.am.more.punctual.than.most.people.I.know                                                                    : int  1 2 3 3 1 5 2 4 4 4 ...
+##  $ X.AIP.13..I.do.routine.maintenance..e.g...changing.the.car.oil..on.things.I.own.as.often.as.I.should                    : int  1 2 5 4 2 4 3 3 4 4 ...
+##  $ X.AIP.14.When.I.have.to.be.somewhere.at.a.certain.time.my.friends.expect.me.to.run.a.bit.late                           : int  1 2 4 2 1 5 1 4 3 4 ...
+##  $ X.AIP.15.Putting.things.off.till.the.last.minute.has.cost.me.money.in.the.past                                          : int  3 4 3 1 2 5 4 5 3 5 ...
+##  $ X.GP.1.I.often.find.myself.performing.tasks.that.I.had.intended.to.do.days.before                                       : int  1 4 5 4 4 5 4 5 3 5 ...
+##  $ X.GP2..I.often.miss.concerts..sporting.events..or.the.like.because.I.don.t.get.around.to.buying.tickets.on.time         : int  1 2 2 1 1 5 1 1 4 3 ...
+##  $ X.GP.3..When.planning.a.party..I.make.the.necessary.arrangements.well.in.advance                                        : int  1 2 2 3 2 2 1 3 3 3 ...
+##  $ X.GP.4..When.it.is.time.to.get.up.in.the.morning..I.most.often.get.right.out.of.bed                                     : int  1 2 4 3 4 5 1 4 4 1 ...
+##  $ X.GP.5..A.letter.may.sit.for.days.after.I.write.it.before.mailing.it.possible                                           : int  1 2 3 2 5 4 1 3 2 5 ...
+##  $ X.GP.6..I.generally.return.phone.calls.promptly                                                                         : int  1 2 1 3 2 4 2 3 2 5 ...
+##  $ X.GP.7..Even.jobs.that.require.little.else.except.sitting.down.and.doing.them..I.find.that.they.seldom.get.done.for.days: int  1 4 3 4 4 5 3 4 4 5 ...
+##  $ X.GP.8..I.usually.make.decisions.as.soon.as.possible                                                                    : int  1 2 2 5 2 4 2 3 2 4 ...
+##  $ X.GP.9..I.generally.delay.before.starting.on.work.I.have.to.do                                                          : int  1 4 5 4 4 4 4 4 4 5 ...
+##  $ X.GP.10..When.traveling..I.usually.have.to.rush.in.preparing.to.arrive.at.the.airport.or.station.at.the.appropriate.time: int  1 2 4 1 1 3 1 4 1 3 ...
+##  $ X.GP.11..When.preparing.to.go.out..I.am.seldom.caught.having.to.do.something.at.the.last.minute                         : int  5 3 5 3 2 4 4 3 5 5 ...
+##  $ X.GP.12..In.preparation.for.some.deadlines..I.often.waste.time.by.doing.other.things                                    : int  1 4 5 4 3 4 2 5 2 5 ...
+##  $ X.GP.13..If.a.bill.for.a.small.amount.comes..I.pay.it.right.away                                                        : int  1 2 3 3 2 3 3 2 3 4 ...
+##  $ X.GP.14..I.usually.return.a..RSVP..request.very.shortly.after.receiving.it                                              : int  1 2 4 3 4 4 2 2 2 4 ...
+##  $ X.GP.15..I.often.have.a.task.finished.sooner.than.necessary                                                             : int  1 3 5 4 3 4 4 4 1 4 ...
+##  $ X.GP.16..I.always.seem.to.end.up.shopping.for.birthday.gifts.at.the.last.minute                                         : int  1 4 2 4 2 4 3 4 5 5 ...
+##  $ X.GP.17..I.usually.buy.even.an.essential.item.at.the.last.minute                                                        : int  1 3 3 3 3 4 1 3 5 3 ...
+##  $ X.GP.18..I.usually.accomplish.all.the.things.I.plan.to.do.in.a.day                                                      : int  5 3 5 4 2 4 4 4 1 5 ...
+##  $ X.GP.19..I.am.continually.saying..I.ll.do.it.tomorrow.                                                                  : int  1 4 5 5 3 4 4 4 1 5 ...
+##  $ X.GP.20..I.usually.take.care.of.all.the.tasks.I.have.to.do.before.I.settle.down.and.relax.for.the.evening               : int  5 4 4 1 4 4 2 4 3 5 ...
+##  $ X.SWLS.1..In.most.ways.my.life.is.close.to.my.ideal                                                                     : int  5 3 2 2 4 3 3 3 4 1 ...
+##  $ X.SWLS.2.The.conditions.of.my.life.are.excellent                                                                        : int  5 4 2 4 4 2 4 3 4 4 ...
+##  $ X.SWLS.3..I.am.satisfied.with.my.life.                                                                                  : int  5 4 2 2 4 4 3 3 5 2 ...
+##  $ X.SWLS.4..So.far.I.have.gotten.the.important.things.I.want.in.life                                                      : int  5 4 3 2 3 4 3 2 4 4 ...
+##  $ X.SWLS.5..If.I.could.live.my.life.over..I.would.change.almost.nothing                                                   : int  5 3 4 2 4 3 2 3 4 1 ...
+##  $ Do.you.consider.yourself.a.procrastinator.                                                                              : Factor w/ 3 levels "","no","yes": 2 3 3 3 2 3 3 3 2 3 ...
+##  $ Do.others.consider.you.a.procrastinator.                                                                                : Factor w/ 5 levels "","0","4","no",..: 4 5 5 5 4 5 5 5 4 5 ...
+```
+
+```r
 # checking for Null values in the data set
 
 anyNA(Procrastination)
+```
 
+```
+## [1] TRUE
+```
 
+```r
 # b The column names are either too much or not enough. Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you're updating your codebook with information on the tidied data set as well.
 
 
@@ -91,15 +141,14 @@ anyNA(Procrastination)
 
 
 # e Each variable that starts with either DP, AIP, GP, or SWLS is an individual item on a scale. For example, DP 1 through DP 5 are five different questions on the Decision Procrastination Scale. I've reverse-scored them for you already, but you should create a new column for each of them with their mean. To clarify, you'll need a DPMean column, an AIPMean column, a GPMean column, and a SWLSMean column. This represents the individual's average decisional procrastination (DP), procrastination behavior (AIP), generalized procrastination (GP), and life satisfaction (SWLS).
-
 ```
 
 
 ## Scrape the Human Development Index tables online
 
 
-```{r CaseStudy_2_5.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
+```r
 # (https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries). Read what it is, because you'll have to explain it to your clients. BIG TIP: This one's going to be weird looking-it's real scraping. Make sure you're looking between the webpage and R while you do this to find your footing. Unit 9's HW might help.
 
 # a You will notice there are several sections, but you should only worry about the Complete List of Countries section of this Wikipedia entry. There are 8 tables in this section, but you should pull these eight, clean them as to be usable, and then find a way to bind them into one singular table. You only need Country and 2016 Estimates for 2015 (you can call this HDI) columns for the final table.
@@ -203,14 +252,13 @@ ProcrastinationHdiDataErrors <- ProcrastinationHdiData[which(is.na(Procrastinati
 # Puerto Rico
 # Taiwan
 # Yugoslavia
-
 ```
 
 
 ## Preliminary Analysis
 
-```{r CaseStudy_2_6.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
+```r
 # a Remove all observations where the participant is under age 18. No further analysis of underage individuals is permitted by your client. Remove any other age outliers as you see fit, but be sure to tell what you're doing and why.
 
 
@@ -224,13 +272,12 @@ ProcrastinationHdiDataErrors <- ProcrastinationHdiData[which(is.na(Procrastinati
 
 
 # e There are two variables in the set: whether the person considers themselves a procrastinator (yes/no) and whether others consider them a procrastinator (yes/no). How many people matched their perceptions to others' (so, yes/yes and no/no)? To clarify: how many people said they felt they were procrastinators and also said others thought they were procrastinators? Likewise, how many said they were not procrastinators and others also did not think they were procrastinators?
-
 ```
 
 ## Deeper Analysis and Visualization
 
-```{r CaseStudy_2_7.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
+```r
 # a Note: You should make all of these appealing looking. Remember to include things like a clean, informative title, axis labels that are in plain English, and readable axis values that do not overlap.
 
 
@@ -244,14 +291,12 @@ ProcrastinationHdiDataErrors <- ProcrastinationHdiData[which(is.na(Procrastinati
 
 
 # e What about Life Satisfaction and HDI? Create another scatterplot. Is there a discernible relationship there? What about if you used the HDI category instead and made a barplot?
-
-
 ```
 
 ## Outputting to CSV format - Make sure there are no index numbers
 
-```{r CaseStudy_2_8.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
+```r
 # a The client would like the finalized HDI table (3A and 3B)
 
 
@@ -262,7 +307,6 @@ ProcrastinationHdiDataErrors <- ProcrastinationHdiData[which(is.na(Procrastinati
 
 
 # d All output should be in plain English or translated in the Codebook.
-
 ```
 
 ## Conclusion
