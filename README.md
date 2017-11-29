@@ -1,2 +1,35 @@
 # CaseStudy2-Repo
-CaseStudy2 using the procrastination data set
+
+#Introduction
+
+Introduction and a short overview of the project
+
+
+#Company
+Name  of the organization
+
+
+
+
+#Motivation
+
+A short description of the motivation behind the project
+
+
+
+#Installation
+
+code examples and explanation of how to get the project and packages installed
+
+
+#API Reference
+
+Any Reference docs used
+
+
+#Contributors
+Gregory Asamoah
+Emil Ramos
+Brian Coari
+
+
