@@ -52,7 +52,15 @@ The Procrastination csv data set contains 4264 observations and 61 variables
 Install necessary packages if not installed:
 
 ```{r CaseStudy_2_2.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
+install.packages("rvest")
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("tidyr")
 
+library(rvest)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
 
 ```
 
