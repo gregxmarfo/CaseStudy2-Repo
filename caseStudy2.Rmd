@@ -120,6 +120,15 @@ names(Procrastination)[5:61] = c("WorkStatus","Income","Occupation","PositionYrs
 
 # i Some have impossible data values. Detail what you are doing to fix these columns in the raw data and why. It's a judgment call for each, but explain why. For example, most people have not been doing anything for over 100 years. For the "Years" columns, round to the nearest integer.
 
+#Note that the data frame has 61 columns and 4264 rows and some of the columns have Null values and impossible data values. E.g People doing nothing over 100 years might be dead and must be removed from the dataset
+
+glimpse(Procrastination)
+
+#Identify which variables are NA
+all_na = sapply(Procrastination, function(x)all(is.na(x)))
+summary(all_na)
+NA_Sub=Procrastination[!all_na]
+
 # ii Somehow, "Number of sons" was labeled with Male (1) and Female (2). Change these incorrect labels back to integers.
 
 # iii There are no "0" country of residences. Treat this as missing.
@@ -131,6 +140,10 @@ names(Procrastination)[5:61] = c("WorkStatus","Income","Occupation","PositionYrs
 
 
 # e Each variable that starts with either DP, AIP, GP, or SWLS is an individual item on a scale. For example, DP 1 through DP 5 are five different questions on the Decision Procrastination Scale. I've reverse-scored them for you already, but you should create a new column for each of them with their mean. To clarify, you'll need a DPMean column, an AIPMean column, a GPMean column, and a SWLSMean column. This represents the individual's average decisional procrastination (DP), procrastination behavior (AIP), generalized procrastination (GP), and life satisfaction (SWLS).
+
+```
+
+```{r}
 
 ```
 
