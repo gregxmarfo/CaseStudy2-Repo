@@ -56,11 +56,13 @@ install.packages("rvest")
 install.packages("dplyr")
 install.packages("ggplot2")
 install.packages("tidyr")
+install.packages("tibble")
 
 library(rvest)
 library(dplyr)
 library(ggplot2)
 library(tidyr)
+library(tibble)
 
 ```
 
@@ -80,6 +82,20 @@ str(Procrastination)
 
 anyNA(Procrastination)
 
+#view its class
+class(Procrastination)
+
+# View its dimension
+dim(Procrastination)
+
+# look at the column names
+names(Procrastination)
+
+#structure of the data
+glimpse(Procrastination)
+
+#view summary
+summary(Procrastination)
 
 # b The column names are either too much or not enough. Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you're updating your codebook with information on the tidied data set as well.
 
