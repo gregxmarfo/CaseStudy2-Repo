@@ -2,7 +2,7 @@
 
 #Introduction
 
-Introduction and a short overview of the project
+Introduction and a short overview of the project and its objective
 
 
 #Company
@@ -35,5 +35,10 @@ Gregory Asamoah
 Emil Ramos
 
 Brian Coari
+
+#Contact Information
+
+
+#Session Information
 
 
