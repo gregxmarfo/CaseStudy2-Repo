@@ -6,6 +6,7 @@ Introduction and a short overview of the project
 
 
 #Company
+
 Name  of the organization
 
 
@@ -28,8 +29,11 @@ Any Reference docs used
 
 
 #Contributors
+
 Gregory Asamoah
+
 Emil Ramos
+
 Brian Coari
 
 
