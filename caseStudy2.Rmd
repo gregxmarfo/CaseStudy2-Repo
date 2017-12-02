@@ -16,20 +16,28 @@ output:
     keep_md: true
 ---
 
+#Install necessary packages if not installed:
+
 ```{r CaseStudy_2_1.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
+# Find all packages that are not in the list of installed packages and install packages used if not yet installed
+list.of.packages <- c('xml2','rvest', 'dplyr', 'tidyr', 'DT','readr', 'ggplot2')
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
+library('xml2')
+library('rvest')
+library('dplyr')
+library('tidyr')
+library('DT')
+library('readr')
+library('ggplot2')
 
 ```
 
 ## Introduction
 
 #[some text here]
-
-## Installing Necessary Libraries
-
-```{r}
-
-```
 
 
 ##Code Book for the raw Data
@@ -43,32 +51,13 @@ output:
 
 
 ```{r}
-library(readr)
-Procrastination_Raw_Data <- read_csv("C:/Users/GREG/Desktop/Procrastination_Raw_Data.txt")
+stringsAsFactors=FALSE
+
+Procrastination_Raw_Data <- read.csv(".\\Data\\Procrastination.csv",header=TRUE, sep=",", fileEncoding="UTF-8-BOM")
 
 class(Procrastination_Raw_Data)
 sapply(Procrastination_Raw_Data, class)
 summary(Procrastination_Raw_Data)
-
-```
-
-#CODE BOOK for the Clean Data
-```{r}
-class(Procrastination)
-sapply(Procrastination, class)
-summary(Procrastination)
-```
-
-
-#Install necessary packages if not installed:
-
-```{r CaseStudy_2_2.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
-
-library(rvest)
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-
 
 ```
 
@@ -79,41 +68,36 @@ library(tidyr)
 
 # a Read the csv into R and take a look at the data set. Output how many rows and columns the data.frame is.
 
-library(readr)
-Procrastination <- read.csv(".\\Data\\Procrastination.csv",header=TRUE, sep=",", fileEncoding="UTF-8-BOM")
-
 #renaming the columns
 
-names(Procrastination)[5:61] = c("WorkStatus","Income","Occupation","PositionYrs","PositionMnth","CommSize","Country","MaritalStatus","NumofSons","NumofDaughters","XDP1","XDP2","XDP3","XDP4","XDP5","XAIP1","XAIP2","XAIP3","XAIP4","XAIP5","XAIP6","XAIP7","XAIP8","XAIP9","XAIP10","XAIP11","XAIP12","XAIP13","XAIP14","XAIP15","XGP1","XGP2","XGP3","XGP4","XGP5","XGP6","XGP7","XGP8","XGP9","XGP10","XGP11","XGP12","XGP13","XGP14","XGP15","XGP16","XGP17","XGP18","XGP19","XGP20","XSWLS1","XSWLS2","XSWLS3","XSWLS4","XSWLS5","Yourself","Others")
+names(Procrastination_Raw_Data)[5:61] = c("WorkStatus","Income","Occupation","PositionYrs","PositionMnth","CommSize","Country","MaritalStatus","NumofSons","NumofDaughters","XDP1","XDP2","XDP3","XDP4","XDP5","XAIP1","XAIP2","XAIP3","XAIP4","XAIP5","XAIP6","XAIP7","XAIP8","XAIP9","XAIP10","XAIP11","XAIP12","XAIP13","XAIP14","XAIP15","XGP1","XGP2","XGP3","XGP4","XGP5","XGP6","XGP7","XGP8","XGP9","XGP10","XGP11","XGP12","XGP13","XGP14","XGP15","XGP16","XGP17","XGP18","XGP19","XGP20","XSWLS1","XSWLS2","XSWLS3","XSWLS4","XSWLS5","Yourself","Others")
 
-
-
-str(Procrastination)
+str(Procrastination_Raw_Data)
 
 # checking for Null values in the data set
 
-anyNA(Procrastination)
+anyNA(Procrastination_Raw_Data)
 
 #view its class
-class(Procrastination)
+class(Procrastination_Raw_Data)
 
 # View its dimension
-dim(Procrastination)
+dim(Procrastination_Raw_Data)
 
 # look at the column names
-names(Procrastination)
+names(Procrastination_Raw_Data)
 
 #structure of the data
-glimpse(Procrastination)
+glimpse(Procrastination_Raw_Data)
 
 #view summary
-summary(Procrastination)
+summary(Procrastination_Raw_Data)
 
 # b The column names are either too much or not enough. Change the column names so that they do not have spaces, underscores, slashes, and the like. All column names should be under 12 characters. Make sure you're updating your codebook with information on the tidied data set as well.
 
 #renaming the columns
 
-names(Procrastination)[5:61] = c("WorkStatus","Income","Occupation","PositionYrs","PositionMnth","CommSize","Country","MaritalStatus","NumofSons","NumofDaughters","XDP1","XDP2","XDP3","XDP4","XDP5","XAIP1","XAIP2","XAIP3","XAIP4","XAIP5","XAIP6","XAIP7","XAIP8","XAIP9","XAIP10","XAIP11","XAIP12","XAIP13","XAIP14","XAIP15","XGP1","XGP2","XGP3","XGP4","XGP5","XGP6","XGP7","XGP8","XGP9","XGP10","XGP11","XGP12","XGP13","XGP14","XGP15","XGP16","XGP17","XGP18","XGP19","XGP20","XSWLS1","XSWLS2","XSWLS3","XSWLS4","XSWLS5","Yourself","Others")
+names(Procrastination_Raw_Data)[5:61] = c("WorkStatus","Income","Occupation","PositionYrs","PositionMnth","CommSize","Country","MaritalStatus","NumofSons","NumofDaughters","XDP1","XDP2","XDP3","XDP4","XDP5","XAIP1","XAIP2","XAIP3","XAIP4","XAIP5","XAIP6","XAIP7","XAIP8","XAIP9","XAIP10","XAIP11","XAIP12","XAIP13","XAIP14","XAIP15","XGP1","XGP2","XGP3","XGP4","XGP5","XGP6","XGP7","XGP8","XGP9","XGP10","XGP11","XGP12","XGP13","XGP14","XGP15","XGP16","XGP17","XGP18","XGP19","XGP20","XSWLS1","XSWLS2","XSWLS3","XSWLS4","XSWLS5","Yourself","Others")
 
 
 # c Some columns are, due to Qualtrics, malfunctioning. Prime examples are the following columns: "How long have you held this position?: Years", Country of residence, Number of sons, and Current Occupation.
@@ -122,12 +106,12 @@ names(Procrastination)[5:61] = c("WorkStatus","Income","Occupation","PositionYrs
 
 #Note that the data frame has 61 columns and 4264 rows and some of the columns have Null values and impossible data values. E.g People doing nothing over 100 years might be dead and must be removed from the dataset
 
-glimpse(Procrastination)
+glimpse(Procrastination_Raw_Data)
 
 #Identify which variables are NA
-all_na = sapply(Procrastination, function(x)all(is.na(x)))
+all_na = sapply(Procrastination_Raw_Data, function(x)all(is.na(x)))
 summary(all_na)
-NA_Sub=Procrastination[!all_na]
+NA_Sub=Procrastination_Raw_Data[!all_na]
 
 # ii Somehow, "Number of sons" was labeled with Male (1) and Female (2). Change these incorrect labels back to integers.
 
@@ -156,10 +140,6 @@ NA_Sub=Procrastination[!all_na]
 # (https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries). Read what it is, because you'll have to explain it to your clients. BIG TIP: This one's going to be weird looking-it's real scraping. Make sure you're looking between the webpage and R while you do this to find your footing. Unit 9's HW might help.
 
 # a You will notice there are several sections, but you should only worry about the Complete List of Countries section of this Wikipedia entry. There are 8 tables in this section, but you should pull these eight, clean them as to be usable, and then find a way to bind them into one singular table. You only need Country and 2016 Estimates for 2015 (you can call this HDI) columns for the final table.
-library('xml2')
-library('rvest')
-library('dplyr')
-library('tidyr')
 
 url <- 'https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries'
 
@@ -232,19 +212,18 @@ hdiDataFrame_all$Development.Category[which(hdiDataFrame_all$HDI >= 0 & hdiDataF
 # Taiwan
 # Yugoslavia
 
-
 #These 5 lines could go in data cleanup:
-Procrastination <- Procrastination[which(Procrastination$Country.of.residence != ""),]
-Procrastination <- Procrastination[which(Procrastination$Country.of.residence != "0"),]
-Procrastination <- Procrastination[which(!is.na(Procrastination$Country.of.residence)),]
+Procrastination_Raw_Data <- Procrastination_Raw_Data[which(Procrastination_Raw_Data$Country != ""),]
+Procrastination_Raw_Data <- Procrastination_Raw_Data[which(Procrastination_Raw_Data$Country != "0"),]
+Procrastination_Raw_Data <- Procrastination_Raw_Data[which(!is.na(Procrastination_Raw_Data$Country)),]
 #changed to match merged HDI data
-Procrastination$Country.of.residence[which(Procrastination$Country.of.residence == "Isreal")] <- "Israel"
+Procrastination_Raw_Data$Country[which(Procrastination_Raw_Data$Country == "Isreal")] <- "Israel"
 
 #changed to match Procrastination
 hdiDataFrame_all$Country[which(hdiDataFrame_all$Country == "Antigua and Barbuda")] <- "Antigua"
 
 #Merge the data and keep all Procrastination, even if there is no match for HDI Data. We can revisit this later if it causes problems
-ProcrastinationHdiData <- merge(Procrastination,hdiDataFrame_all,by.x = "Country.of.residence", by.y = "Country",all.x=TRUE)
+ProcrastinationHdiData <- merge(Procrastination_Raw_Data,hdiDataFrame_all,by.x = "Country", by.y = "Country",all.x=TRUE)
 
 ProcrastinationHdiDataErrors <- ProcrastinationHdiData[which(is.na(ProcrastinationHdiData$HDI)),]
 
@@ -264,10 +243,35 @@ ProcrastinationHdiDataErrors <- ProcrastinationHdiData[which(is.na(Procrastinati
 
 ```{r CaseStudy_2_6.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
-# a Remove all observations where the participant is under age 18. No further analysis of underage individuals is permitted by your client. Remove any other age outliers as you see fit, but be sure to tell what you're doing and why.
+
+# a Remove all observations where the participant is under age 18. No further analysis of underage individuals is permitted by your client. Remove any other age outliers as you see fit, but be sure to tell what you’re doing and why.
+ProcrastinationHdiData_18_or_older <- ProcrastinationHdiData[which(ProcrastinationHdiData$Age >= 18),]
+
+# b Please provide (in pretty-fied table format or similar), descriptive statistics on Age, Income, HDI, and the four mean columns (DP, etc.). 
+#Create a simple histogram for two of these seven variables. Comment on the shape of the distribution in your markdown.
+#summary(ProcrastinationHdiData_18_or_older$DP_Mean)
+#summary(ProcrastinationHdiData_18_or_older$AIC_Mean)
+#summary(ProcrastinationHdiData_18_or_older$GP_Mean)
+#summary(ProcrastinationHdiData_18_or_older$SWLS_Mean)
+
+#separate the summary from its class structure to be stored in a data frame 
+dfAgeSummary<- data.frame(unclass(summary(ProcrastinationHdiData_18_or_older$Age)), check.names = FALSE)
+dfIncomeSummary<- data.frame(unclass(summary(ProcrastinationHdiData_18_or_older$Income)), check.names = FALSE)
+dfHDISummary<- data.frame(unclass(summary(ProcrastinationHdiData_18_or_older$HDI)), check.names = FALSE)
+
+#Transpose to get the identifiers into columns
+dfAgeSummaryT <- data.frame(round(t(dfAgeSummary),2))
+dfIncomeSummaryT <- data.frame(round(t(dfIncomeSummary),2))
+dfHDISummaryT <- data.frame(round(t(dfHDISummary),2))
 
 
-# b Please provide (in pretty-fied table format or similar), descriptive statistics on Age, Income, HDI, and the four mean columns (DP, etc.). Create a simple histogram for two of these seven variables. Comment on the shape of the distribution in your markdown.
+#print the datatables in a pretty-fied format
+datatable(dfAgeSummaryT, rownames = FALSE,
+          caption = 'Summary of Age Statistics')
+datatable(dfIncomeSummaryT, rownames = FALSE,
+          caption = 'Summary of Income Statistics')
+datatable(dfHDISummaryT, rownames = FALSE,
+          caption = 'Summary of HDI Statistics')
 
 
 # c Give the frequencies (in table format or similar) for Gender, Work Status, and Occupation. They can be separate tables, if that's your choice.
