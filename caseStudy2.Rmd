@@ -55,9 +55,9 @@ stringsAsFactors=FALSE
 
 Procrastination_Raw_Data <- read.csv(".\\Data\\Procrastination.csv",header=TRUE, sep=",", fileEncoding="UTF-8-BOM")
 
-class(Procrastination_Raw_Data)
+#class(Procrastination_Raw_Data)
 sapply(Procrastination_Raw_Data, class)
-summary(Procrastination_Raw_Data)
+#summary(Procrastination_Raw_Data)
 
 ```
 
@@ -68,14 +68,9 @@ summary(Procrastination_Raw_Data)
 
 # a Read the csv into R and take a look at the data set. Output how many rows and columns the data.frame is.
 
-#renaming the columns
-
-names(Procrastination_Raw_Data)[5:61] = c("WorkStatus","Income","Occupation","PositionYrs","PositionMnth","CommSize","Country","MaritalStatus","NumofSons","NumofDaughters","XDP1","XDP2","XDP3","XDP4","XDP5","XAIP1","XAIP2","XAIP3","XAIP4","XAIP5","XAIP6","XAIP7","XAIP8","XAIP9","XAIP10","XAIP11","XAIP12","XAIP13","XAIP14","XAIP15","XGP1","XGP2","XGP3","XGP4","XGP5","XGP6","XGP7","XGP8","XGP9","XGP10","XGP11","XGP12","XGP13","XGP14","XGP15","XGP16","XGP17","XGP18","XGP19","XGP20","XSWLS1","XSWLS2","XSWLS3","XSWLS4","XSWLS5","Yourself","Others")
-
 str(Procrastination_Raw_Data)
 
 # checking for Null values in the data set
-
 anyNA(Procrastination_Raw_Data)
 
 #view its class
@@ -104,30 +99,58 @@ names(Procrastination_Raw_Data)[5:61] = c("WorkStatus","Income","Occupation","Po
 
 # i Some have impossible data values. Detail what you are doing to fix these columns in the raw data and why. It's a judgment call for each, but explain why. For example, most people have not been doing anything for over 100 years. For the "Years" columns, round to the nearest integer.
 
+#Data in the PostionYrs column that is 999 years or blank we will omit in our analysis, since 999 years is impossible and blank values are bad data. 
+#Omitting the rows is better than assuming a different value, and we have enough data with valid values to complete our analysis.
+Procrastination_Raw_Data <- Procrastination_Raw_Data[which(Procrastination_Raw_Data$PositionYrs != ""),]
+Procrastination_Raw_Data <- Procrastination_Raw_Data[which(Procrastination_Raw_Data$PositionYrs != 999),]
+Procrastination_Raw_Data$PositionYrs <- round(Procrastination_Raw_Data$PositionYrs,0)
+
 #Note that the data frame has 61 columns and 4264 rows and some of the columns have Null values and impossible data values. E.g People doing nothing over 100 years might be dead and must be removed from the dataset
-
-glimpse(Procrastination_Raw_Data)
-
-#Identify which variables are NA
-all_na = sapply(Procrastination_Raw_Data, function(x)all(is.na(x)))
-summary(all_na)
-NA_Sub=Procrastination_Raw_Data[!all_na]
+#glimpse(Procrastination_Raw_Data)
 
 # ii Somehow, "Number of sons" was labeled with Male (1) and Female (2). Change these incorrect labels back to integers.
+Procrastination_Raw_Data <- Procrastination_Raw_Data[which(Procrastination_Raw_Data$NumofSons == "Male"),]
+Procrastination_Raw_Data$NumofSons[which(Procrastination_Raw_Data$NumofSons == "Male")] <- "1"
+Procrastination_Raw_Data$NumofSons[which(Procrastination_Raw_Data$NumofSons == "Female")] <- "2"
+Procrastination_Raw_Data$NumofSons <- as.integer(Procrastination_Raw_Data$NumofSons)
 
 # iii There are no "0" country of residences. Treat this as missing.
+Procrastination_Raw_Data$Country[which(Procrastination_Raw_Data$Country == "0")] <- NA
+
 
 # iv Current Occupation has no "please specify" or "0." Treat them as missing. Some jobs are quite similar. Use judgment calls to make overwrite them into the same category. It does not have to be 100% accurate, but right now "ESL Teacher" would not be counted as "teacher" if there were unique counts.
-
+Procrastination_Raw_Data$Occupation[which(Procrastination_Raw_Data$Occupation == "0")] <- NA
+Procrastination_Raw_Data$Occupation[which(Procrastination_Raw_Data$Occupation == "please specify")] <- NA
 
 # d Make sure your columns are the proper data types (i.e., numeric, character, etc.). If they are incorrect, convert them.
+
+#Reclassifying variables to their logical types
+#The "Yourself" and "Others" fields could be boolean, but there are some bad values in Others so we're just proceeding as characters for now, we only lose a slight performance gain given the size of our data.
+Procrastination_Raw_Data$Gender <- as.character(Procrastination_Raw_Data$Gender)
+Procrastination_Raw_Data$Kids <- as.character(Procrastination_Raw_Data$Kids)
+Procrastination_Raw_Data$Edu <- as.character(Procrastination_Raw_Data$Edu)
+Procrastination_Raw_Data$WorkStatus <- as.character(Procrastination_Raw_Data$WorkStatus)
+Procrastination_Raw_Data$Occupation <- as.character(Procrastination_Raw_Data$Occupation)
+Procrastination_Raw_Data$PositionYrs <- as.integer(Procrastination_Raw_Data$PositionYrs)
+Procrastination_Raw_Data$CommSize <- as.character(Procrastination_Raw_Data$CommSize)
+Procrastination_Raw_Data$Country <- as.character(Procrastination_Raw_Data$Country)
+Procrastination_Raw_Data$MaritalStatus <- as.character(Procrastination_Raw_Data$MaritalStatus)
+Procrastination_Raw_Data$Yourself <- as.character(Procrastination_Raw_Data$Yourself)
+Procrastination_Raw_Data$Others <- as.character(Procrastination_Raw_Data$Others)
 
 
 # e Each variable that starts with either DP, AIP, GP, or SWLS is an individual item on a scale. For example, DP 1 through DP 5 are five different questions on the Decision Procrastination Scale. I've reverse-scored them for you already, but you should create a new column for each of them with their mean. To clarify, you'll need a DPMean column, an AIPMean column, a GPMean column, and a SWLSMean column. This represents the individual's average decisional procrastination (DP), procrastination behavior (AIP), generalized procrastination (GP), and life satisfaction (SWLS).
 
-```
+#Grab average of all the  DP, AIP, GP, and SWLS fields in a simple and readable way, summing and dividing
+Procrastination_Raw_Data$DP_Mean <- mean(c(Procrastination_Raw_Data$XDP1,Procrastination_Raw_Data$XDP2,Procrastination_Raw_Data$XDP3,Procrastination_Raw_Data$XDP4,Procrastination_Raw_Data$XDP5))
 
-```{r}
+Procrastination_Raw_Data$DP_Mean <- (Procrastination_Raw_Data$XDP1 + Procrastination_Raw_Data$XDP2 + Procrastination_Raw_Data$XDP3 + Procrastination_Raw_Data$XDP4 + Procrastination_Raw_Data$XDP5)/5
+
+Procrastination_Raw_Data$AIP_Mean <- (Procrastination_Raw_Data$XAIP1 + Procrastination_Raw_Data$XAIP2 + Procrastination_Raw_Data$XAIP3 + Procrastination_Raw_Data$XAIP4 + Procrastination_Raw_Data$XAIP5 + Procrastination_Raw_Data$XAIP6 + Procrastination_Raw_Data$XAIP7 + Procrastination_Raw_Data$XAIP8 + Procrastination_Raw_Data$XAIP9 + Procrastination_Raw_Data$XAIP10 + Procrastination_Raw_Data$XAIP11 + Procrastination_Raw_Data$XAIP12 + Procrastination_Raw_Data$XAIP13 + Procrastination_Raw_Data$XAIP14 + Procrastination_Raw_Data$XAIP15)/15
+
+Procrastination_Raw_Data$GP_Mean <- (Procrastination_Raw_Data$XGP1 + Procrastination_Raw_Data$XGP2 + Procrastination_Raw_Data$XGP3 + Procrastination_Raw_Data$XGP4 + Procrastination_Raw_Data$XGP5 + Procrastination_Raw_Data$XGP6 + Procrastination_Raw_Data$XGP7 + Procrastination_Raw_Data$XGP8 + Procrastination_Raw_Data$XGP9 + Procrastination_Raw_Data$XGP10 + Procrastination_Raw_Data$XGP11 + Procrastination_Raw_Data$XGP12 + Procrastination_Raw_Data$XGP13 + Procrastination_Raw_Data$XGP14 + Procrastination_Raw_Data$XGP15 + Procrastination_Raw_Data$XGP16 + Procrastination_Raw_Data$XGP17 + Procrastination_Raw_Data$XGP18 + Procrastination_Raw_Data$XGP19 + Procrastination_Raw_Data$XGP20 )/20
+
+Procrastination_Raw_Data$SWLS_Mean <- (Procrastination_Raw_Data$XSWLS1 + Procrastination_Raw_Data$XSWLS2 + Procrastination_Raw_Data$XSWLS3 + Procrastination_Raw_Data$XSWLS4 + Procrastination_Raw_Data$XSWLS5)/5
 
 ```
 
@@ -248,21 +271,24 @@ ProcrastinationHdiDataErrors <- ProcrastinationHdiData[which(is.na(Procrastinati
 ProcrastinationHdiData_18_or_older <- ProcrastinationHdiData[which(ProcrastinationHdiData$Age >= 18),]
 
 # b Please provide (in pretty-fied table format or similar), descriptive statistics on Age, Income, HDI, and the four mean columns (DP, etc.). 
-#Create a simple histogram for two of these seven variables. Comment on the shape of the distribution in your markdown.
-#summary(ProcrastinationHdiData_18_or_older$DP_Mean)
-#summary(ProcrastinationHdiData_18_or_older$AIC_Mean)
-#summary(ProcrastinationHdiData_18_or_older$GP_Mean)
-#summary(ProcrastinationHdiData_18_or_older$SWLS_Mean)
 
 #separate the summary from its class structure to be stored in a data frame 
 dfAgeSummary<- data.frame(unclass(summary(ProcrastinationHdiData_18_or_older$Age)), check.names = FALSE)
 dfIncomeSummary<- data.frame(unclass(summary(ProcrastinationHdiData_18_or_older$Income)), check.names = FALSE)
 dfHDISummary<- data.frame(unclass(summary(ProcrastinationHdiData_18_or_older$HDI)), check.names = FALSE)
+dfDPSummary<- data.frame(unclass(summary(ProcrastinationHdiData_18_or_older$DP_Mean)), check.names = FALSE)
+dfAIPSummary<- data.frame(unclass(summary(ProcrastinationHdiData_18_or_older$AIP_Mean)), check.names = FALSE)
+dfGPSummary<- data.frame(unclass(summary(ProcrastinationHdiData_18_or_older$GP_Mean)), check.names = FALSE)
+dfSWLSSummary<- data.frame(unclass(summary(ProcrastinationHdiData_18_or_older$SWLS_Mean)), check.names = FALSE)
 
 #Transpose to get the identifiers into columns
 dfAgeSummaryT <- data.frame(round(t(dfAgeSummary),2))
 dfIncomeSummaryT <- data.frame(round(t(dfIncomeSummary),2))
 dfHDISummaryT <- data.frame(round(t(dfHDISummary),2))
+dfDPSummaryT <- data.frame(round(t(dfDPSummary),2))
+dfAIPSummaryT <- data.frame(round(t(dfAIPSummary),2))
+dfGPSummaryT <- data.frame(round(t(dfGPSummary),2))
+dfSWLSSummaryT <- data.frame(round(t(dfSWLSSummary),2))
 
 
 #print the datatables in a pretty-fied format
@@ -272,7 +298,17 @@ datatable(dfIncomeSummaryT, rownames = FALSE,
           caption = 'Summary of Income Statistics')
 datatable(dfHDISummaryT, rownames = FALSE,
           caption = 'Summary of HDI Statistics')
+datatable(dfDPSummaryT, rownames = FALSE,
+          caption = 'Summary of DP Statistics')
+datatable(dfAIPSummaryT, rownames = FALSE,
+          caption = 'Summary of AIP Statistics')
+datatable(dfGPSummaryT, rownames = FALSE,
+          caption = 'Summary of GP Statistics')
+datatable(dfSWLSSummaryT, rownames = FALSE,
+          caption = 'Summary of SWLS Statistics')
 
+
+#Create a simple histogram for two of these seven variables. Comment on the shape of the distribution in your markdown.
 
 # c Give the frequencies (in table format or similar) for Gender, Work Status, and Occupation. They can be separate tables, if that's your choice.
 
