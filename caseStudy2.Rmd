@@ -316,16 +316,45 @@ datatable(dfGPSummaryT, rownames = FALSE,
 datatable(dfSWLSSummaryT, rownames = FALSE,
           caption = 'Summary of SWLS Statistics')
 
-
 #Create a simple histogram for two of these seven variables. Comment on the shape of the distribution in your markdown.
+hist(ProcrastinationHdiData_18_or_older$Income, xlab="Income", ylab="count",  main="Count of Incomes")
+hist(ProcrastinationHdiData_18_or_older$Age, xlab="Age", ylab="count",  main="Count of Ages")
+```
+
+
+As we can see see from the Income histogram, most of our data comes from people with incomes less than 100,000 US Dollars per year. There is not a normal distribution of these data, since a large number of observations contain data that is 150,000 US Dollars per year, and some small number of respondents have an income at the right-tail end of 250,000 US Dollars per year which serves as a maximum for this dataset, with a minimum of 0. This data could either be viewed as an abnormal right skew, or possibly even bimodal data. 
+
+For the ages we see a roughly normal distribution with a median/mode/mean around the 40-50 range. The extreme values are around 20 and 80, the min and max for the dataset.
+
+
+```{r CaseStudy_2_6_2.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
 # c Give the frequencies (in table format or similar) for Gender, Work Status, and Occupation. They can be separate tables, if that's your choice.
 
+ProcrastinationHdiData_18_or_older
+
+barplot(height=table(ProcrastinationHdiData_18_or_older$Gender), xlab="Gender", ylab="Frequency",  main="Frequency of Genders")
+barplot(height=table(ProcrastinationHdiData_18_or_older$WorkStatus), xlab="Work Status", ylab="Frequency",  main="Frequency of Work Status")
+barplot(height=table(ProcrastinationHdiData_18_or_older$Gender), xlab="Occupations", ylab="Frequency",  main="Frequency of Occupations")
+
 
 # d Give the counts (again, pretty table) of how many participants per country in descending order.
-
+GdpPlot <- ggplot(data=ProcrastinationHdiData_18_or_older, aes(x=reorder(Country,Country,length)))
+GdpPlot <- GdpPlot + geom_bar(aes(y = (..count..))) + scale_y_continuous() + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
+GdpPlot <- GdpPlot + xlab("Country") + ylab("Count of participants") + ggtitle("Count of participants by Country")
+print(GdpPlot)
 
 # e There are two variables in the set: whether the person considers themselves a procrastinator (yes/no) and whether others consider them a procrastinator (yes/no). How many people matched their perceptions to others' (so, yes/yes and no/no)? To clarify: how many people said they felt they were procrastinators and also said others thought they were procrastinators? Likewise, how many said they were not procrastinators and others also did not think they were procrastinators?
+
+
+
+yes_yes_match <- Procrastination_Raw_Data[which(ProcrastinationHdiData_18_or_older$Yourself == "yes" & ProcrastinationHdiData_18_or_older$Others == "yes"),]
+no_no_match <- Procrastination_Raw_Data[which(ProcrastinationHdiData_18_or_older$Yourself == "no" & ProcrastinationHdiData_18_or_older$Others == "no"),]
+
+#Get the number of matches from yes_yes_match
+length(yes_yes_match$Yourself)
+#Get the number of matches from no_no_match
+length(no_no_match$Yourself)
 
 ```
 
