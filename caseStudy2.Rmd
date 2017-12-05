@@ -20,7 +20,7 @@ output:
 
 ```{r CaseStudy_2_1.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 # Find all packages that are not in the list of installed packages and install packages used if not yet installed
-list.of.packages <- c('xml2','rvest', 'dplyr', 'tidyr', 'DT','readr', 'ggplot2')
+list.of.packages <- c('xml2','rvest', 'dplyr', 'tidyr', 'DT','readr', 'ggplot2','plyr','reshape2')
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
@@ -31,6 +31,9 @@ library('tidyr')
 library('DT')
 library('readr')
 library('ggplot2')
+library('reshape2')
+library('plyr')
+
 
 ```
 
@@ -339,10 +342,10 @@ barplot(height=table(ProcrastinationHdiData_18_or_older$Gender), xlab="Occupatio
 
 
 # d Give the counts (again, pretty table) of how many participants per country in descending order.
-GdpPlot <- ggplot(data=ProcrastinationHdiData_18_or_older, aes(x=reorder(Country,Country,length)))
-GdpPlot <- GdpPlot + geom_bar(aes(y = (..count..))) + scale_y_continuous() + theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
-GdpPlot <- GdpPlot + xlab("Country") + ylab("Count of participants") + ggtitle("Count of participants by Country")
-print(GdpPlot)
+ProcrastinationCountryPlot <- ggplot(data=ProcrastinationHdiData_18_or_older, aes(x=reorder(Country,Country,length)))
+ProcrastinationCountryPlot <- ProcrastinationCountryPlot + geom_bar(aes(y = (..count..))) + scale_y_continuous() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ProcrastinationCountryPlot <- ProcrastinationCountryPlot + xlab("Country") + ylab("Count of participants") + ggtitle("Count of participants by Country")
+print(ProcrastinationCountryPlot)
 
 # e There are two variables in the set: whether the person considers themselves a procrastinator (yes/no) and whether others consider them a procrastinator (yes/no). How many people matched their perceptions to others' (so, yes/yes and no/no)? To clarify: how many people said they felt they were procrastinators and also said others thought they were procrastinators? Likewise, how many said they were not procrastinators and others also did not think they were procrastinators?
 
@@ -367,17 +370,112 @@ length(no_no_match$Yourself)
 
 # b Create a barchart in ggplot or similar which displays the top 15 nations in average procrastination scores, using one measure of the following: DP, AIP, or GP. The bars should be in descending order, with the number 1 most procrastinating nation at the top and 15th most procrastinating at the bottom. Omit all other nations. Color the bars by HDI category (see 3B). Use any color palette of your choice other than the default.
 
+# 
+# ProcrastinationCountryPlot <- ggplot(data=ProcrastinationHdiData_18_or_older, aes(x=reorder(Country,Country,length)))
+# ProcrastinationCountryPlot <- ProcrastinationCountryPlot + geom_bar(aes(y = (..count..))) + scale_y_continuous() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+# ProcrastinationCountryPlot <- ProcrastinationCountryPlot + xlab("Country") + ylab("Count of participants") + ggtitle("Count of participants by Country")
+# print(ProcrastinationCountryPlot)
+
+
+#Get the average DP Mean by country
+CountryByDPMean <- ddply(ProcrastinationHdiData_18_or_older, c("Country"), summarise,DP_Mean = mean(DP_Mean))
+
+#Create the order of the countries ranked by DP_Mean in a data frame and rename the column to Country
+CountryByDPMeanOrdered <- CountryByDPMean$Country [order (CountryByDPMean$DP_Mean, decreasing = TRUE)]
+CountryByDPMeanOrdered_df = data.frame(CountryByDPMeanOrdered)
+CountryByDPMeanOrdered_df<-rename(CountryByDPMeanOrdered_df, c("CountryByDPMeanOrdered"="Country"))
+
+#Merge the ordered data frame with the DP Mean data
+CountryByDPMeanOrdered_df_merged = merge(CountryByDPMeanOrdered_df,CountryByDPMean,by.x = "Country", by.y = "Country",all.x=TRUE,sort=FALSE)
+CountryByDPMeanTop15 = subset(CountryByDPMeanOrdered_df_merged, Country %in% CountryByDPMeanOrdered [1:15])
+
+#Create an HDI Data Frame to merge with
+CountryByHDICategory <- unique(ProcrastinationHdiData_18_or_older[,c('Country','Development.Category')])
+CountryByDPMeanTop15Hdi <- merge(CountryByDPMeanTop15,CountryByHDICategory,by.x = "Country", by.y = "Country",all.x=TRUE,sort=FALSE)
+
+#Plot the graph with custom colors ordering by DPMean
+Custom_colors <- c("#ffb6c1", "#ffd700", "#000080", "#ff0000")
+CountryByDPMeanTop15HdiPlot <- ggplot(data=CountryByDPMeanTop15Hdi, aes(x=reorder(Country, -DP_Mean), y=DP_Mean, fill=Development.Category))
+CountryByDPMeanTop15HdiPlot <- CountryByDPMeanTop15HdiPlot + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+CountryByDPMeanTop15HdiPlot <- CountryByDPMeanTop15HdiPlot + xlab("Country") + ylab("Average DP Score") + ggtitle("Average DP Score by Country")
+CountryByDPMeanTop15HdiPlot <- CountryByDPMeanTop15HdiPlot + scale_fill_manual(values=Custom_colors)
+print(CountryByDPMeanTop15HdiPlot)
+
+
 
 # c Create another barchart identical in features to 5B, but use another one of the three variables: DP, AIP, or GP. How many nations show up both in 5B's plot and 5C's? Which, if any?
+CountryByGPMean <- ddply(ProcrastinationHdiData_18_or_older, c("Country"), summarise,GP_Mean = mean(GP_Mean))
+
+#Create the order of the countries ranked by GP_Mean in a data frame and rename the column to Country
+CountryByGPMeanOrdered <- CountryByGPMean$Country [order (CountryByGPMean$GP_Mean, decreasing = TRUE)]
+CountryByGPMeanOrdered_df = data.frame(CountryByGPMeanOrdered)
+CountryByGPMeanOrdered_df<-rename(CountryByGPMeanOrdered_df, c("CountryByGPMeanOrdered"="Country"))
+
+#Merge the ordered data frame with the GP Mean data
+CountryByGPMeanOrdered_df_merged = merge(CountryByGPMeanOrdered_df,CountryByGPMean,by.x = "Country", by.y = "Country",all.x=TRUE,sort=FALSE)
+CountryByGPMeanTop15 = subset(CountryByGPMeanOrdered_df_merged, Country %in% CountryByGPMeanOrdered [1:15])
+
+#Create an HDI Data Frame to merge with
+CountryByHDICategory <- unique(ProcrastinationHdiData_18_or_older[,c('Country','Development.Category')])
+CountryByGPMeanTop15Hdi <- merge(CountryByGPMeanTop15,CountryByHDICategory,by.x = "Country", by.y = "Country",all.x=TRUE,sort=FALSE)
+
+#Plot the graph with custom colors ordering by GPMean
+Custom_colors <- c("#ffb6c1", "#ffd700", "#000080", "#ff0000")
+CountryByGPMeanTop15HdiPlot <- ggplot(data=CountryByGPMeanTop15Hdi, aes(x=reorder(Country, -GP_Mean), y=GP_Mean, fill=Development.Category))
+CountryByGPMeanTop15HdiPlot <- CountryByGPMeanTop15HdiPlot + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+CountryByGPMeanTop15HdiPlot <- CountryByGPMeanTop15HdiPlot + xlab("Country") + ylab("Average GP Score") + ggtitle("Average GP Score by Country")
+CountryByGPMeanTop15HdiPlot <- CountryByGPMeanTop15HdiPlot + scale_fill_manual(values=Custom_colors)
+print(CountryByGPMeanTop15HdiPlot)
 
 
+CountryByGP_DPMeanTop15Hdi <- merge(CountryByGPMeanTop15Hdi,CountryByDPMeanTop15Hdi,by.x = "Country", by.y = "Country",all.x=FALSE,all.y=FALSE,sort=FALSE)
+
+print(CountryByGP_DPMeanTop15Hdi$Country)
+
+```
+###These 12 countries are on both the top 15 DP and top 15 GP lists
+
+```{r}
 # d Is there a relationship between Age and Income? Create a scatterplot and make an assessment of whether there is a relationship. Color each point based on the Gender of the participant. You're welcome to use lm() or similar functions to back up your claims.
+AgeIncomePlot <- ggplot(data=ProcrastinationHdiData_18_or_older, aes(x=Age, y=Income, color=Gender))
+AgeIncomePlot <- AgeIncomePlot + geom_point() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+AgeIncomePlot <- AgeIncomePlot + xlab("Age") + ylab("Income") + ggtitle("Income by age")
+AgeIncomePlot <- AgeIncomePlot + theme(plot.title = element_text(hjust = 0.5))
 
+print(AgeIncomePlot)
+```
 
+###Given the shape of the data there appears to be a possibly parabolic relationship between age and income, with high-earners between 25-65 and low earners on both sides
+
+```{r}
 # e What about Life Satisfaction and HDI? Create another scatterplot. Is there a discernible relationship there? What about if you used the HDI category instead and made a barplot?
+SWLSMeanHdiPlot <- ggplot(data=ProcrastinationHdiData_18_or_older, aes(x=HDI, y=SWLS_Mean))
+SWLSMeanHdiPlot <- SWLSMeanHdiPlot + geom_point() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+SWLSMeanHdiPlot <- SWLSMeanHdiPlot + ylab("Life Satisfaction Mean Score") + xlab("Country Human Development Index") + ggtitle("Human Development Index by Life Satisfaction")
+SWLSMeanHdiPlot <- SWLSMeanHdiPlot + theme(plot.title = element_text(hjust = 0.5))
+
+print(SWLSMeanHdiPlot)
+```
+
+###The Life Satisfaction Score seems to be independant of the Country's Human Development index, with a fairly even distribution of life satisfaction scores regardless of the HDI
+
+```{r}
+HdiCategoryBySWLSMean <- ddply(ProcrastinationHdiData_18_or_older, c("Development.Category"), summarise,SWLS_Mean = mean(SWLS_Mean))
+
+
+SWLSMeanHdiCategoryPlot <- ggplot(data=HdiCategoryBySWLSMean, aes(y=SWLS_Mean, x=Development.Category))
+SWLSMeanHdiCategoryPlot <- SWLSMeanHdiCategoryPlot + geom_col() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+SWLSMeanHdiCategoryPlot <- SWLSMeanHdiCategoryPlot + ylab("Life Satisfaction Mean Score") + xlab("Country Human Development Category") + ggtitle("Human Development by Life Satisfaction")
+SWLSMeanHdiCategoryPlot <- SWLSMeanHdiCategoryPlot + theme(plot.title = element_text(hjust = 0.5))
+
+print(SWLSMeanHdiCategoryPlot)
 
 
 ```
+
+###Given the barchart there appears to be a slightly than higher average Life Satisfaction Score in countrie with a medium Human Development Index Category
+
+
 
 ## Outputting to CSV format - Make sure there are no index numbers
 
