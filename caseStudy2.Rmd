@@ -39,17 +39,25 @@ library('plyr')
 
 ## Introduction
 
-Procrastination can basically be defined as the action of delaying  or postponing task that needs to be done.It's an inevitable part of human life and our various daily activities that are time bound. It has implications for performance, prevents you from meeting deadlines, can lead to disorganization and becomes the major reason for  failure on time bound projects and daily life activities.
-We have finally finished data collection and it involved various measures of procrastination and the qualities of individuals in the sample.
-The dataset included 4264 observations and 16 variables from the United States. The main outcome of this study is the empirical results on procrastination from  a data set of human task and activities using data analytics technique and a tool called R and Rstudio
+Greetings Nintendo Marketing Team,
 
-The outcome and result of this study can help support actions that can lead to improve performance in daily task and activities, aid in meeting deadlines, lead to better organization and becomes the framework or model for success on various daily task and human activities.
+Our company, LazyLife Inc., is an expert an analyzing procrastination data and Life Satisfaction statistics for countries across the world. We have access to thousands of observations that give us insight into who in world considers themselves a procrastinator, and who is satisfied with their life. LazyLife Inc. differentiates itself from our competition by also including exerpts from the Human Development Index (HDI) to see which countries are happy, lazy, and developed.
 
-The paper outlined the various codes used in  R and Rstudio in  cleaning the procrastination data set, the analysis and the results presented, including a visualization illustrations of the procrastination data set in an HTML and pushed to GitHub.
+Procrastination can basically be defined as the action of delaying  or postponing task that needs to be done. It's an inevitable part of human life and our various daily activities that are time bound. It has implications for performance, prevents you from meeting deadlines, can lead to disorganization and becomes the major reason for  failure on time bound projects and daily life activities. However, during this procrastination, what are people doing? I'll tell you what I'm doing... playing Nintendo!  
 
-The paper closes with conclusions and implications of procrastination.
+We believe that by leveraging our data, Nintendo will be able to target the laziest and most developed countries in order to get the most value for your marketing dollars. In addition, adding in life satisfaction will assure you that your customers are happy, wealthy, lazy, and ready to consume. This is what we feel is your ideal market, and will allow your product to thrive in perhaps new and lucrative markets.
 
+If you purchase the results of our analysis we will provide you with quarterly updates on these markets so you can adjust and continue to be most effective in your marketing and advertising.
 
+Thank you,
+
+Brian Coari, Gergory Asamoah, and Emil Ramos
+
+LazyLife Inc.
+
+Email: datascience@lazylife.com
+
+Phone: (555) 867-5309
 
 
 ##Code Book for the raw Data
@@ -496,3 +504,25 @@ write.csv(CountryByGPMeanTop15Hdi, file = ".\\Paper\\Top15CountriesByGpWithHdi.c
 ```
 
 ## Conclusion
+
+Greetings Nintendo Marketing Team,
+
+From our analysis we provided you the 12 laziest countries:
+Sweden, New Zealand, Spain, China, Poland, Germany, Portugal, Ireland, Brazil, Ecuador, Jamaica, United Kingdom
+
+From this list, the countries with a very high Human Development index are:
+Sweden, New Zealand, Spain, Poland, Germany, Portugal, Ireland, and United Kingdom
+
+We deduce that the Very Highly Developed and very highly procrastinating humans in these countries would be ideal cadidates for Nintendo marketing. Please let us knwo if you find our services valuable and would like to invest in more information now and in the future.
+
+Thank you,
+
+Brian Coari, Gergory Asamoah, and Emil Ramos
+
+LazyLife Inc.
+
+Email: datascience@lazylife.com
+
+Phone: (555) 867-5309
+
+

@@ -27,17 +27,25 @@ library('plyr')
 
 ## Introduction
 
-Procrastination can basically be defined as the action of delaying  or postponing task that needs to be done.It's an inevitable part of human life and our various daily activities that are time bound. It has implications for performance, prevents you from meeting deadlines, can lead to disorganization and becomes the major reason for  failure on time bound projects and daily life activities.
-We have finally finished data collection and it involved various measures of procrastination and the qualities of individuals in the sample.
-The dataset included 4264 observations and 16 variables from the United States. The main outcome of this study is the empirical results on procrastination from  a data set of human task and activities using data analytics technique and a tool called R and Rstudio
+Greetings Nintendo Marketing Team,
 
-The outcome and result of this study can help support actions that can lead to improve performance in daily task and activities, aid in meeting deadlines, lead to better organization and becomes the framework or model for success on various daily task and human activities.
+Our company, LazyLife Inc., is an expert an analyzing procrastination data and Life Satisfaction statistics for countries across the world. We have access to thousands of observations that give us insight into who in world considers themselves a procrastinator, and who is satisfied with their life. LazyLife Inc. differentiates itself from our competition by also including exerpts from the Human Development Index (HDI) to see which countries are happy, lazy, and developed.
 
-The paper outlined the various codes used in  R and Rstudio in  cleaning the procrastination data set, the analysis and the results presented, including a visualization illustrations of the procrastination data set in an HTML and pushed to GitHub.
+Procrastination can basically be defined as the action of delaying  or postponing task that needs to be done. It's an inevitable part of human life and our various daily activities that are time bound. It has implications for performance, prevents you from meeting deadlines, can lead to disorganization and becomes the major reason for  failure on time bound projects and daily life activities. However, during this procrastination, what are people doing? I'll tell you what I'm doing... playing Nintendo!  
 
-The paper closes with conclusions and implications of procrastination.
+We believe that by leveraging our data, Nintendo will be able to target the laziest and most developed countries in order to get the most value for your marketing dollars. In addition, adding in life satisfaction will assure you that your customers are happy, wealthy, lazy, and ready to consume. This is what we feel is your ideal market, and will allow your product to thrive in perhaps new and lucrative markets.
 
+If you purchase the results of our analysis we will provide you with quarterly updates on these markets so you can adjust and continue to be most effective in your marketing and advertising.
 
+Thank you,
+
+Brian Coari, Gergory Asamoah, and Emil Ramos
+
+LazyLife Inc.
+
+Email: datascience@lazylife.com
+
+Phone: (555) 867-5309
 
 
 ##Code Book for the raw Data
@@ -1069,56 +1077,56 @@ datatable(dfAgeSummaryT, rownames = FALSE,
           caption = 'Summary of Age Statistics')
 ```
 
-<!--html_preserve--><div id="htmlwidget-2993f1e443444afe51b8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2993f1e443444afe51b8">{"x":{"filter":"none","caption":"<caption>Summary of Age Statistics<\/caption>","data":[[20],[37.5],[45],[47.62],[55],[80]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-4c5b1491597ca4ece35d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4c5b1491597ca4ece35d">{"x":{"filter":"none","caption":"<caption>Summary of Age Statistics<\/caption>","data":[[20],[37.5],[45],[47.62],[55],[80]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 ```r
 datatable(dfIncomeSummaryT, rownames = FALSE,
           caption = 'Summary of Income Statistics')
 ```
 
-<!--html_preserve--><div id="htmlwidget-3b8b6f999e6ffe3a09c9" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3b8b6f999e6ffe3a09c9">{"x":{"filter":"none","caption":"<caption>Summary of Income Statistics<\/caption>","data":[[10000],[35000],[67500],[81589.62],[87500],[250000],[38]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n      <th>NA.s<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-d166809e9d085f207afe" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d166809e9d085f207afe">{"x":{"filter":"none","caption":"<caption>Summary of Income Statistics<\/caption>","data":[[10000],[35000],[67500],[81589.62],[87500],[250000],[38]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n      <th>NA.s<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 ```r
 datatable(dfHDISummaryT, rownames = FALSE,
           caption = 'Summary of HDI Statistics')
 ```
 
-<!--html_preserve--><div id="htmlwidget-437c4966c5fe86feb9d7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-437c4966c5fe86feb9d7">{"x":{"filter":"none","caption":"<caption>Summary of HDI Statistics<\/caption>","data":[[0.55],[0.92],[0.92],[0.91],[0.92],[0.95],[1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n      <th>NA.s<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-18cdd26e24a29e50c8b8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-18cdd26e24a29e50c8b8">{"x":{"filter":"none","caption":"<caption>Summary of HDI Statistics<\/caption>","data":[[0.55],[0.92],[0.92],[0.91],[0.92],[0.95],[1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n      <th>NA.s<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5,6]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 ```r
 datatable(dfDPSummaryT, rownames = FALSE,
           caption = 'Summary of DP Statistics')
 ```
 
-<!--html_preserve--><div id="htmlwidget-d7889c6bd9579b86eec7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d7889c6bd9579b86eec7">{"x":{"filter":"none","caption":"<caption>Summary of DP Statistics<\/caption>","data":[[1],[2.2],[3],[2.99],[3.6],[5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-ee287e9e8b96b4305592" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ee287e9e8b96b4305592">{"x":{"filter":"none","caption":"<caption>Summary of DP Statistics<\/caption>","data":[[1],[2.2],[3],[2.99],[3.6],[5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 ```r
 datatable(dfAIPSummaryT, rownames = FALSE,
           caption = 'Summary of AIP Statistics')
 ```
 
-<!--html_preserve--><div id="htmlwidget-a5130c1d59426a891e72" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a5130c1d59426a891e72">{"x":{"filter":"none","caption":"<caption>Summary of AIP Statistics<\/caption>","data":[[1],[2.33],[2.93],[2.96],[3.53],[5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-98d26777957b5758ee17" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-98d26777957b5758ee17">{"x":{"filter":"none","caption":"<caption>Summary of AIP Statistics<\/caption>","data":[[1],[2.33],[2.93],[2.96],[3.53],[5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 ```r
 datatable(dfGPSummaryT, rownames = FALSE,
           caption = 'Summary of GP Statistics')
 ```
 
-<!--html_preserve--><div id="htmlwidget-d6d0a3f5a90f27dbb472" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d6d0a3f5a90f27dbb472">{"x":{"filter":"none","caption":"<caption>Summary of GP Statistics<\/caption>","data":[[1.15],[2.7],[3.25],[3.19],[3.7],[4.95]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-9fa2ad013c033d1d99b2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9fa2ad013c033d1d99b2">{"x":{"filter":"none","caption":"<caption>Summary of GP Statistics<\/caption>","data":[[1.15],[2.7],[3.25],[3.19],[3.7],[4.95]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 ```r
 datatable(dfSWLSSummaryT, rownames = FALSE,
           caption = 'Summary of SWLS Statistics')
 ```
 
-<!--html_preserve--><div id="htmlwidget-f994aa69e13edaddc2cd" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f994aa69e13edaddc2cd">{"x":{"filter":"none","caption":"<caption>Summary of SWLS Statistics<\/caption>","data":[[1],[2.4],[3.2],[3.1],[3.8],[5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-43382e75c67181adae22" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-43382e75c67181adae22">{"x":{"filter":"none","caption":"<caption>Summary of SWLS Statistics<\/caption>","data":[[1],[2.4],[3.2],[3.1],[3.8],[5]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Min.<\/th>\n      <th>X1st.Qu.<\/th>\n      <th>Median<\/th>\n      <th>Mean<\/th>\n      <th>X3rd.Qu.<\/th>\n      <th>Max.<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 ```r
 #Create a simple histogram for two of these seven variables. Comment on the shape of the distribution in your markdown.
@@ -5837,7 +5845,7 @@ print(CountryByGP_DPMeanTop15Hdi$Country)
 ##  [9] Brazil         Ecuador        Jamaica        United Kingdom
 ## 36 Levels: Argentina Australia Bermuda Bolivia Brazil Canada ... Venezuela
 ```
-###These 12 countries are on both the top 15 DP and top 15 GP lists:
+###These 12 countries are on both the top 15 DP and top 15 GP lists
 
 
 ```r
@@ -5901,15 +5909,38 @@ print(SWLSMeanHdiCategoryPlot)
 
 ```r
 # a The client would like the finalized HDI table (3A and 3B)
-
+write.csv(hdiDataFrame_all, file = ".\\Paper\\FinalizedHdiTable.csv",row.names=FALSE)
 
 # b The client would like the Tidied version of the original input to be output in the repository, including the merged HDI data (3C).
-
+write.csv(ProcrastinationHdiData_18_or_older, file = ".\\Paper\\TidiedProcrastinationHdiData.csv",row.names=FALSE)
 
 # c The client would like a dataset (or two) that shows the Top 15 nations (in 5B and 5C), as well as their HDI scores.
-
+write.csv(CountryByDPMeanTop15Hdi, file = ".\\Paper\\Top15CountriesByDpWithHdi.csv",row.names=FALSE)
+write.csv(CountryByGPMeanTop15Hdi, file = ".\\Paper\\Top15CountriesByGpWithHdi.csv",row.names=FALSE)
 
 # d All output should be in plain English or translated in the Codebook.
 ```
 
 ## Conclusion
+
+Greetings Nintendo Marketing Team,
+
+From our analysis we provided you the 12 laziest countries:
+Sweden, New Zealand, Spain, China, Poland, Germany, Portugal, Ireland, Brazil, Ecuador, Jamaica, United Kingdom
+
+From this list, the countries with a very high Human Development index are:
+Sweden, New Zealand, Spain, Poland, Germany, Portugal, Ireland, and United Kingdom
+
+We deduce that the Very Highly Developed and very highly procrastinating humans in these countries would be ideal cadidates for Nintendo marketing. Please let us knwo if you find our services valuable and would like to invest in more information now and in the future.
+
+Thank you,
+
+Brian Coari, Gergory Asamoah, and Emil Ramos
+
+LazyLife Inc.
+
+Email: datascience@lazylife.com
+
+Phone: (555) 867-5309
+
+
