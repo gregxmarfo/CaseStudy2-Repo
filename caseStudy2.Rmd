@@ -482,13 +482,14 @@ print(SWLSMeanHdiCategoryPlot)
 ```{r CaseStudy_2_8.R, eval=TRUE, echo=TRUE, message = FALSE, warning = FALSE}
 
 # a The client would like the finalized HDI table (3A and 3B)
-
+write.csv(hdiDataFrame_all, file = ".\\Paper\\FinalizedHdiTable.csv",row.names=FALSE)
 
 # b The client would like the Tidied version of the original input to be output in the repository, including the merged HDI data (3C).
-
+write.csv(ProcrastinationHdiData_18_or_older, file = ".\\Paper\\TidiedProcrastinationHdiData.csv",row.names=FALSE)
 
 # c The client would like a dataset (or two) that shows the Top 15 nations (in 5B and 5C), as well as their HDI scores.
-
+write.csv(CountryByDPMeanTop15Hdi, file = ".\\Paper\\Top15CountriesByDpWithHdi.csv",row.names=FALSE)
+write.csv(CountryByGPMeanTop15Hdi, file = ".\\Paper\\Top15CountriesByGpWithHdi.csv",row.names=FALSE)
 
 # d All output should be in plain English or translated in the Codebook.
 
